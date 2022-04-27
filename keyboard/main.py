@@ -24,7 +24,7 @@ if morU1[0]=='https://www':
 
     findv = glob.glob("*.mp4")
     print(findv)
-    new_name = r"C:/Users/hp/kakenkeyboard/piano1.mp4"
+    new_name = r"C:/Users/hp/kakenkeyboard/keyboard/piano1.mp4"
     os.rename(findv[0],new_name)
 
 """
@@ -33,7 +33,7 @@ else:
 
 
 """delete previous images"""
-folder_path = 'C:/Users/hp/kakenkeyboard/imagefile/tryout'
+folder_path = 'C:/Users/hp/kakenkeyboard/keyboard/imagefile/tryout'
 
 for file_name in listdir(folder_path):
 
@@ -61,4 +61,4 @@ def save_all_frames(video_path, dir_path, basename, ext='jpg'):
             n += 1
         else:
             return
-save_all_frames(r"C:/Users/hp/kakenkeyboard/piano1.mp4", "C:/Users/hp/kakenkeyboard/imagefile/tryout" , 'keyboard_img')
+save_all_frames(new_name, folder_path , 'img')
