@@ -8,12 +8,14 @@ import os
 from os import listdir
 
 
+"""asking for url"""
 morU = input('Enter mp4file name or youtube url')
 print(morU)
 
 morU1 = morU.split('.',1)
 
 
+"""if youtube url"""
 if morU1[0]=='https://www':
     print(morU1)
     ydl_opts = {}
@@ -24,9 +26,11 @@ if morU1[0]=='https://www':
     print(findv)
     new_name = r"C:/Users/hp/kakenkeyboard/piano1.mp4"
     os.rename(findv[0],new_name)
+
 """
 else:
     if file uploaded"""
+
 
 """delete previous images"""
 folder_path = 'C:/Users/hp/kakenkeyboard/imagefile/tryout'
@@ -34,6 +38,7 @@ folder_path = 'C:/Users/hp/kakenkeyboard/imagefile/tryout'
 for file_name in listdir(folder_path):
 
     os.remove(folder_path + file_name)
+
 
 """video to images"""
 def save_all_frames(video_path, dir_path, basename, ext='jpg'):
