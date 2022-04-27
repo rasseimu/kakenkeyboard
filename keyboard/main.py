@@ -10,20 +10,16 @@ from os import listdir
 
 """asking for url"""
 morU = input('Enter mp4file name or youtube url')
-print(morU)
-
 morU1 = morU.split('.',1)
 
 
 """if youtube url"""
 if morU1[0]=='https://www':
-    print(morU1)
     ydl_opts = {}
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([morU])
 
     findv = glob.glob("*.mp4")
-    print(findv)
     new_name = r"C:/Users/hp/kakenkeyboard/keyboard/piano1.mp4"
     os.rename(findv[0],new_name)
 
