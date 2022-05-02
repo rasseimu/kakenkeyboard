@@ -58,3 +58,18 @@ def save_all_frames(video_path, dir_path, basename, ext='jpg'):
         else:
             return
 save_all_frames(r"C:/Users/hp/kakenkeyboard/piano1.mp4", "C:/Users/hp/kakenkeyboard/imagefile/tryout" , 'keyboard_img')
+
+datalist=[]
+
+class eachdata:
+    pass
+
+n=eachdata()
+n.pit = 'C1'
+n.len = 1
+
+while 1:
+
+    n=0
+    datalist=[n.pit,n.len]
+    n+=1
