@@ -11,3 +11,4 @@ plt.imshow(img,'gray')
 plt.hist(img.flatten(), 256, [0,256]);
 
 print(img.shape)
+print(SasakiLove)
