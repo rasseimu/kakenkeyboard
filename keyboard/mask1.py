@@ -30,18 +30,18 @@ cv2.rectangle(imgMask, (boxFromX, boxFromY), (boxToX, boxToY),(255), cv2.FILLED)
 img_resize = cv2.resize(imgMask, dsize=[1920,1080], fx=None, fy=None)
 
 # マスク結果画像を保存
-cv2.imwrite("./mask/testMaskImg.jpg", img_resize)
+cv2.imwrite("./imagefile/testMaskImg.jpg", img_resize)
 plt.imshow(img_resize)
 
 
 # In[84]:
 
 
-white=cv2.imread("./before/white.jpg",cv2.IMREAD_COLOR)
-im_mask = cv2.imread('./mask/testMaskImg.jpg')
+white=cv2.imread("./imagefile/white.jpg",cv2.IMREAD_COLOR)
+im_mask = cv2.imread('./imagefile/testMaskImg.jpg')
 white_resize = cv2.resize(white, dsize=[1920,1080], fx=None, fy=None)
 im_out = cv2.bitwise_and(white_resize, im_mask)
-cv2.imwrite('./after/whitemask.jpg', im_out)
+cv2.imwrite('./imagefile/whitemask.jpg', im_out)
 plt.imshow(im_out)
 
 
@@ -50,18 +50,18 @@ plt.imshow(im_out)
 
 black=cv2.bitwise_not(im_out)
 plt.imshow(black)
-cv2.imwrite("./mask/blackmask.jpg",black)
+cv2.imwrite("./imagefile/blackmask.jpg",black)
 
 
 # In[86]:
 
 
-im_1 = cv2.imread('./before/hpiano0.jpg', cv2.IMREAD_COLOR)
-im_mask = cv2.imread('./mask/blackmask.jpg')
+im_1 = cv2.imread('./imagefile/pianoCE1.jpg', cv2.IMREAD_COLOR)
+im_mask = cv2.imread('./imagefile/blackmask.jpg')
 plt.imshow(im_1)
 plt.imshow(im_mask)
 im_out = cv2.bitwise_or(im_1, im_mask)
-cv2.imwrite('./after/out.jpg', im_out)
+cv2.imwrite('./imagefile/out.jpg', im_out)
 plt.imshow(im_out)
 
 
@@ -77,7 +77,7 @@ def imshow(img, format=".jpg", **kwargs):
 
 
 # 画像を読み込む。
-img = cv2.imread("./after/out.jpg")
+img = cv2.imread("./imagefile/out.jpg")
 imshow(img)
 
 #ここまではうまくいってる
@@ -94,7 +94,7 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # 2値化する
 ret, bin_img = cv2.threshold(gray, 55, 255, cv2.THRESH_BINARY)
 print(ret)
-cv2.imwrite("./after/grayspiano0.jpg",bin_img)
+cv2.imwrite("./imagefile/mask_pianoCE1.jpg",bin_img)
 imshow(bin_img)
 
 
@@ -112,7 +112,7 @@ contours = list(filter(lambda x: cv2.contourArea(x) > 100, contours))
 # 輪郭を描画する。
 cv2.drawContours(img, contours, -1, color=(0, 0, 255), thickness=2)
 imshow(img)
-cv2.imwrite("./after/karisyori.jpg",img)
+cv2.imwrite("./imagefile/mask_pianoCE1.jpg",img)
 
 
 # In[90]:
@@ -137,4 +137,3 @@ fig, ax = plt.subplots(figsize=(8, 8))
 draw_contours(ax, img, contours)
 
 plt.show()
-
