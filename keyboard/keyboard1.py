@@ -3,6 +3,7 @@ import glob
 import cv2
 import numpy as np
 
+
 # 画像配列の作成
 def create_images_array(load_img_paths):
     imgs = []
