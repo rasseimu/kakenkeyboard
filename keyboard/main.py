@@ -6,6 +6,7 @@ import cv2
 import matplotlib.pyplot as plt
 import os
 from os import listdir
+import numpy as np
 
 
 """asking for url"""
@@ -59,6 +60,17 @@ def save_all_frames(video_path, dir_path, basename, ext='jpg'):
             return
 save_all_frames(r"C:/Users/hp/kakenkeyboard/piano1.mp4", "C:/Users/hp/kakenkeyboard/imagefile/tryout" , 'keyboard_img')
 
+
+#データ送信
+eachdata_type = [( 'key' , 'U10' ),( 'num' , 'i4' ),( 'det' , 'U10' )]
+eachdatas = np.array([('C',4,'half'),('D',5,'quoter')], dtype = eachdata_type)#実際の値を代入
+#eachdatas[0]と入れることによって、C,4,halfを表示することが出来る。また、eachdatas[0]['key']と打つと、Cだけを表示させることが出来る。
+
+
+
+
+
+#2
 datalist=[]
 
 class eachdata:
