@@ -56,7 +56,7 @@ if morU1[0]=='https://www':
         ydl.download([morU])
 
     findv = glob.glob("*.mp4")
-    new_name = r"C:/Users/hp/kakenkeyboard/keyboard/before/piano1.mp4"
+    new_name = r"./keyboard/before/piano1.mp4"
     os.rename(findv[0],new_name)
     save_all_frames(r"./keyboard/before/piano.mp4", "./keyboard/imagefile/tryout" , 'img')
 
