@@ -2,6 +2,7 @@ import cv2
 from PIL import Image, ImageOps
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.spatial as ssp
 #画像の読み込み
 img = cv2.imread('./imagefile/pianoCE.jpg')
 #座標入力
@@ -13,6 +14,8 @@ M = cv2.getPerspectiveTransform(pts1, pts2)
 dst = cv2.warpPerspective(img, M, (1850, 400))
 #ファイル書き出し
 cv2.imwrite("./card_result.jpg", dst)
+
+
 
 img = cv2.imread('./imagefile/pianoN.jpg')
 #座標入力
@@ -43,8 +46,39 @@ ksize=3
 img_mask = cv2.medianBlur(YCrCb_mask,ksize)
 
 cv2.imshow("mask",img_mask)
-
 cv2.imwrite("./YCbCr.jpg",img_mask)
+
+# 凸包処理
+def convexHull(img, ):
+    bgr_timg = cv2.imread(img)
+    
+    # 二値化
+    imgray = cv2.cvtColor(bgr_timg, cv2.COLOR_BGR2GRAY)
+    
+    ret,thresh = cv2.threshold(imgray, 0, 255,
+                cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+    yl, xl = np.where(thresh == 255)
+
+    # 座標データ形式に変換
+    yl = yl.reshape((-1, 1))
+    xl = xl.reshape((-1, 1))
+    vec = np.hstack((xl, yl))
+
+    # 凸包処理
+    hull = cv2.convexHull(vec)
+
+    # 結果描画
+    result_img = cv2.drawContours(bgr_timg,[hull],0,(255,255,255),-1)
+ 
+    return result_img
+
+cv2.imshow("hand",convexHull("./YCbCr.jpg", ))
+cv2.imwrite("./YCbCr.jpg",convexHull("./YCbCr.jpg", ))
+cv2.waitKey(0)
+
+
+
+
 
 # 画像を読み込む。
 fg_img = cv2.imread('./YCbCr.jpg')
@@ -61,6 +95,7 @@ dst1 = bg_img * fg_img
 cv2.imwrite("./diff1.jpg",dst1)
 cv2.imshow("dif1",dst1)
 cv2.waitKey(0)
+
 bg_img = cv2.imread("./card_result.jpg")
 bg_img = cv2.bitwise_not(bg_img)
 dst2 = bg_img * fg_img
