@@ -12,4 +12,4 @@ c=statistics.mode(a)
 
 BPM=1800/c
 
-print(BPM)
+#print(BPM)
