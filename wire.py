@@ -16,7 +16,9 @@ while output[i] == 0:
     output.remove(0)
     i += 1
 
-BPM = 0
+#BPM
+
+
 
 #配列変更の処理
 for j in output:#貰った配列の長さ
