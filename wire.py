@@ -307,9 +307,9 @@ output = [[],
 [],
 [],
 ]
-#output = [0,0,0,0,0,'D4','D4','D4','D4','D4','D4','D4',0,0,0,0,0,0,0,0,0,0,0,0]
+outputs = [[],[],[],[],[],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],[],[],[],[],[],[],[],[],[],[],[],[],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],[]]
 Musicscore = []
-for a in range(len(output)):
+for a in range(len(output)//6):
     Musicscore.append([0,0])
 i = 0
 j = 1
@@ -322,11 +322,7 @@ def Rest(k,x):
     Musicscore[k][0] = '休符'
     Musicscore[k][1] = x
 
-def SoloSound(k,j,x):
-    Musicscore[k][0] = output[j-1]
-    Musicscore[k][1] = x
-
-def CoSound(k,t,j,x):
+def Sound(k,t,j,x):
     Musicscore[k][2*t] = output[j-1][t]
     Musicscore[k][2*t+1] = x
 
@@ -359,70 +355,56 @@ for j in range(1,len(output)):#貰った配列の長さ
     if output[j-1] == output[j]:
         n += 1
 
-    #単音の場合の処理
-    elif not isinstance(output[j-1], list):
+    #休符
+    elif output[j-1] == []:
         n += 1
         if (n > 900/BPM*0.8) & (n < 900/BPM*1.5):
-            
-            if output[j-1] == []:
-                Rest(k,0.5)
-            else:
-                SoloSound(k,j,0.5)
+            Rest(k,0.5)
             n = 0
             k += 1
         
         elif ((n == 900/BPM*1.5) | (n > 900/BPM*1.5)) & (n < 900/BPM*3):
-            if output[j-1] == []:
-                Rest(k,1)
-            else:
-                SoloSound(k,j,1)
+            Rest(k,1)
             n = 0
             k += 1
         
         elif ((n == 900/BPM*3) | (n > 900/BPM*3)) & (n < 900/BPM*6):
-            if output[j-1] == []:
-                Rest(k,2)
-            else:
-                SoloSound(k,j,2)
+            Rest(k,2)
             n = 0
             k += 1
 
         elif ((n == 900/BPM*6) | (n > 900/BPM*6)) & (n < 900/BPM*10):
-            if output[j-1] == []:
-                Rest(k,4)
-            else:
-                SoloSound(k,j,4)
+            Rest(k,4)
             n = 0
             k += 1
 
-
-    #複音の場合の処理
+    #音の処理
     else:
         n += 1
         if (n > 900/BPM*0.8) & (n < 900/BPM*1.5):
             for t in range(len(output[j-1])):
-                CoSound(k,t,j,0.5)
+                Sound(k,t,j,0.5)
             k += 1
             n = 0
             t = 0
         
         elif ((n == 900/BPM*1.5) | (n > 900/BPM*1.5)) & (n < 900/BPM*3):
             for t in range(len(output[j-1])):
-                CoSound(k,t,j,1)
+                Sound(k,t,j,1)
             k += 1
             n = 0
             t = 0
         
         elif ((n == 900/BPM*3) | (n > 900/BPM*3)) & (n < 900/BPM*6):
             for t in range(len(output[j-1])):
-                CoSound(k,t,j,2)
+                Sound(k,t,j,2)
             k += 1
             n = 0
             t = 0
         
         elif ((n == 900/BPM*6) | (n > 900/BPM*6)) & (n < 900/BPM*10):
             for t in range(len(output[j-1])):
-                CoSound(k,t,j,4)
+                Sound(k,t,j,4)
             k += 1
             n = 0
             t = 0
