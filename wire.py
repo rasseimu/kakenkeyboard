@@ -309,8 +309,6 @@ output = [[],
 ]
 outputs = [[],[],[],[],[],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],[],[],[],[],[],[],[],[],[],[],[],[],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],['D4'],[]]
 Musicscore = []
-for a in range(len(output)//6):
-    Musicscore.append([0,0])
 i = 0
 j = 1
 k = 0
@@ -326,6 +324,18 @@ def Sound(k,t,j,x):
     Musicscore[k][2*t] = output[j-1][t]
     Musicscore[k][2*t+1] = x
 
+def appending(t):
+    if t == 1:
+        Musicscore.append([0,0])
+    elif t == 2:
+        Musicscore.append([0,0,0,0])
+    elif t == 3:
+        Musicscore.append([0,0,0,0,0,0])
+    elif t == 4:
+        Musicscore.append([0,0,0,0,0,0,0,0])
+    elif t == 5:
+        Musicscore.append([0,0,0,0,0,0,0,0,0,0])
+        
 #先頭要素"0"の削除
 while output[0] == []:
     output.remove([])
@@ -346,7 +356,7 @@ while output[0] == []:
 
 #print(BPM)
 
-BPM = 120
+BPM = 140
 
 
 #配列変更の処理
@@ -359,21 +369,25 @@ for j in range(1,len(output)):#貰った配列の長さ
     elif output[j-1] == []:
         n += 1
         if (n > 900/BPM*0.8) & (n < 900/BPM*1.5):
+            Musicscore.append([0,0])
             Rest(k,0.5)
             n = 0
             k += 1
         
         elif ((n == 900/BPM*1.5) | (n > 900/BPM*1.5)) & (n < 900/BPM*3):
+            Musicscore.append([0,0])
             Rest(k,1)
             n = 0
             k += 1
         
         elif ((n == 900/BPM*3) | (n > 900/BPM*3)) & (n < 900/BPM*6):
+            Musicscore.append([0,0])
             Rest(k,2)
             n = 0
             k += 1
 
         elif ((n == 900/BPM*6) | (n > 900/BPM*6)) & (n < 900/BPM*10):
+            Musicscore.append([0,0])
             Rest(k,4)
             n = 0
             k += 1
@@ -382,6 +396,7 @@ for j in range(1,len(output)):#貰った配列の長さ
     else:
         n += 1
         if (n > 900/BPM*0.8) & (n < 900/BPM*1.5):
+            appending(len(output[j-1]))
             for t in range(len(output[j-1])):
                 Sound(k,t,j,0.5)
             k += 1
@@ -389,6 +404,7 @@ for j in range(1,len(output)):#貰った配列の長さ
             t = 0
         
         elif ((n == 900/BPM*1.5) | (n > 900/BPM*1.5)) & (n < 900/BPM*3):
+            appending(len(output[j-1]))
             for t in range(len(output[j-1])):
                 Sound(k,t,j,1)
             k += 1
@@ -396,6 +412,7 @@ for j in range(1,len(output)):#貰った配列の長さ
             t = 0
         
         elif ((n == 900/BPM*3) | (n > 900/BPM*3)) & (n < 900/BPM*6):
+            appending(len(output[j-1]))
             for t in range(len(output[j-1])):
                 Sound(k,t,j,2)
             k += 1
@@ -403,11 +420,14 @@ for j in range(1,len(output)):#貰った配列の長さ
             t = 0
         
         elif ((n == 900/BPM*6) | (n > 900/BPM*6)) & (n < 900/BPM*10):
+            appending(len(output[j-1]))
             for t in range(len(output[j-1])):
                 Sound(k,t,j,4)
             k += 1
             n = 0
             t = 0
+
+
 
 
 
