@@ -21,20 +21,20 @@ def appending(t):
     if t == 1:
         Musicscore.append([0,0])
     elif t == 2:
-        Musicscore.append([0,0,0,0])
+        Musicscore.append([[0,0],[0,0]])
     elif t == 3:
-        Musicscore.append([0,0,0,0,0,0])
+        Musicscore.append([[0,0],[0,0],[0,0]])
     elif t == 4:
-        Musicscore.append([0,0,0,0,0,0,0,0])
+        Musicscore.append([[0,0],[0,0],[0,0],[0,0]])
     elif t == 5:
-        Musicscore.append([0,0,0,0,0,0,0,0,0,0])
+        Musicscore.append([[0,0],[0,0],[0,0],[0,0],[0,0]])
 
 while output[0] == []:
     output.remove([])
 
 BPM = 140
 for j in range(1,len(output)):
-    if output[j-1] == output[j]:
+    if ((output[j-1] == output[j]) | (output[j-1] == output[j+1]) | (output[j-1] == output[j+2])):
         n += 1
     elif output[j-1] == []:
         n += 1
@@ -106,10 +106,4 @@ for c,num in Musicscore :
 meas = stream.Measure()
 meas.append(noteList)
 meas.show()
-
-
-
-
-
-
 
